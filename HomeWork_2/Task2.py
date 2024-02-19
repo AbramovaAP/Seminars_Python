@@ -8,3 +8,27 @@
 4 4 -> 2 2
 5 6 -> 2 3
 '''
+
+s = 5
+p = 6
+
+# solutions = []
+# for i in range(1, 1001):
+#     for j in range(1, 1001):
+#         if s == i + j and p == i * j:
+#             solutions.append((min(i, j), max(i, j)))
+#             solutions = list(set(solutions))
+
+# for solution in solutions:
+#     print(solution[0], solution[1])
+
+
+numbers = [] # пустой массив для двух чисел
+
+for x in range(1, 1001):
+    for y in range(1, 1001):
+        if s == x + y and p == x * y:
+            if x <= y: 
+                print (x, y)
+            elif y > x:
+                print (y, x)
