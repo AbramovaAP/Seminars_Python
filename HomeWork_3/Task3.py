@@ -24,10 +24,82 @@
             ноутбук
     Вывод:
             12
+dictionary = {1: ('A', 'E', 'I', 'O', 'U', 'L', 'N', 'S', 'T', 'R', 'А', 'В', 'Е', 'И', 'Н', 'О', 'Р', 'С', 'Т'), 
+              2: ('D', 'G', 'Д', 'К', 'Л', 'М', 'П', 'У'), 
+              3: ('B', 'C', 'M', 'P', 'Б', 'Г', 'Ё', 'Ь', 'Я'), 
+              4: ('F', 'H', 'V', 'W', 'Y', 'Й', 'Ы'), 
+              5: ('K', 'Ж', 'З', 'Х', 'Ц', 'Ч'), 
+              8: ('J', 'X', 'Ш', 'Э', 'Ю'), 
+              10: ('Q', 'Z', 'Ф', 'Щ', 'Ъ')}
+#print(dictionary)
+
 '''
-работаем со словорями
-1. ключи - буквы
-   значения - цифры
-2. Либо ключи - цифры
-   значения - буквы
-3. Либо у каждой буквы свое значение
+
+        # 1. Создаем словари:
+dictionary = {1: ('AEIOULNSTRАВЕИНОРСТ'), 
+              2: ('DGДКЛМПУ'), 
+              3: ('BCMPБГЁЬЯ'), 
+              4: ('FHVWYЙЫ'), 
+              5: ('KЖЗХЦЧ'), 
+              8: ('JXШЭЮ'), 
+              10: ('QZФЩЪ')}
+#print(dictionary)
+
+        # 2. Получаем от пользователя слово
+text = input ('Введите текст, для подсчета его ценности: ')
+print()
+        # 2.1 Преобразуем все  маленькие буквы слова в заглавные
+TEXT = text.upper()
+print(TEXT)
+
+count = 0
+for i in TEXT: #Перебираем все введенное слово и помещаем в переменную i
+    for j in dictionary: #Перебираем все значения в библтотеке и помещаем в переменную j
+        if i in dictionary[j]:
+            count = count + j
+
+print(count)
+
+
+
+
+'''
+        #1. Решение из интернета работает с большими буквами
+
+def fun(x):
+    for key in dct:
+        if x in key:
+            return dct.get(key)
+ 
+dct = {
+    'AEIOULNSTR' : 1, 'DG' : 2, 'BCMP' : 3,
+    'FHVWY' : 4, 'K' : 5, 'JX' : 8, 'QZ' :10
+    }
+print(sum(map(fun, input())))
+
+        #2. Решение из интернета работает с большими буквами
+import re
+ 
+s = input()
+d = {'[AEIOULNSTR]': '1', '[DG]': '2', '[BCMP]': '3', '[FHVWY]': '4', 'K': '5', '[JX]': '8', '[QZ]': '19'}
+for k in d:
+    s = re.sub(k, d[k], s)
+print(sum(map(int, s)))
+
+        #3. Решение из АВТОТЕСТА
+k = 'ноутбук'
+points_en = {1: 'AEIOULNSTR', 2: 'DG', 3: 'BCMP', 4: 'FHVWY', 5: 'K', 8: 'JX', 10: 'QZ'}
+points_ru = {1: 'АВЕИНОРСТ', 2: 'ДКЛМПУ', 3: 'БГЁЬЯ', 4: 'ЙЫ', 5: 'ЖЗХЦЧ', 8: 'ШЭЮ', 10: 'ФЩЪ'}
+word = k.upper()  # переводим все буквы в верхний регистр
+count = 0
+for i in word:
+    if i in 'QWERTYUIOPASDFGHJKLZXCVBNM':
+        for j in points_en:
+            if i in points_en[j]:
+                count = count + j
+    elif i in 'ЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮЁ':
+        for j in points_en:
+            if i in points_ru[j]:
+                count = count + j
+print(count)
+'''
