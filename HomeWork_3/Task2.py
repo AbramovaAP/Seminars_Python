@@ -10,3 +10,32 @@ N = 5
 X = 6
 -> 5
 '''
+
+from random import randint
+
+#1: Запрашиваем у пользователя размер массива:
+size = int(input ('Введите размер массива: '))
+print()
+
+#2: Создаем рандомный массив из элементов и печатаем его
+list_1 = []
+for _ in range(size):
+    n = randint(0, 9)
+    list_1.append(n)
+print(('Сгенерированный массив: '))
+print(list_1) 
+print()
+
+#3: Запрашиваем у пользователя какой элемент нужно сравнить
+element = int(input ('Введите элемент массива для проверки: '))
+print()
+
+#4: цикл для проверки выбранного элемента массива
+min = list_1[0]
+mod = abs(element - min) # модуль числа, чтобы не сравнивать противоположные по знаку числа
+
+for i in range(len(list_1)):
+    if mod >= abs(list_1[i] - element):
+        mod = abs(list_1[i] - element)
+        min = list_1[i]
+print(min)
