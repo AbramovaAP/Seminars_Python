@@ -9,3 +9,13 @@ an = a1 + (n-1) * d.
     Ввод: 7 2 5
     Вывод: 7 9 11 13 15
 '''
+
+a1 = int(input('Введите 1-й элемент: '))
+d = int(input('Введите шаг: '))
+n = int(input('Введите количество элементов: '))
+
+count = 1
+while count <= n:
+    an = a1 + (count-1) * d
+    count += 1
+    print(an)
