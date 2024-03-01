@@ -5,3 +5,14 @@
     Input: 5
     Output: yes
 '''
+
+#1.
+def prime(n):
+    for div in range(2, n // 2 + 1):
+        if n % div == 0:
+            return "No"
+    return "Yes"
+
+num = int(input("Введите число: "))
+print(prime(num))
+
