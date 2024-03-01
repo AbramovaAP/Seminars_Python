@@ -7,8 +7,7 @@
 По данному числу k выведите все пары дружественных
 чисел, каждое из которых не превосходит k. Программа
 получает на вход одно натуральное число k, не
-превосходящее 105
-. Программа должна вывести все
+превосходящее 105. Программа должна вывести все
 пары дружественных чисел, каждое из которых не
 превосходит k. Пары необходимо выводить по одной в
 строке, разделяя пробелами. Каждая пара должна быть
@@ -18,3 +17,24 @@
     300                 220 284
 
 '''
+
+def sum_div(num):
+    summa = 1
+    sq_num = num ** 0.5
+    int_sq_num = int(sq_num) # целочисленный корень
+
+    if sq_num == int_sq_num:
+        summa += int_sq_num
+
+    for div in range(2, int_sq_num):
+        if num % div == 0:
+            summa += div + num // div
+    return summa
+    #return sum(div for div in range(2, num) if num % div == 0)
+
+n = int(input('Введите число: '))
+
+for num1 in range (2, n +1):
+    num2 = sum_div(num1)
+    if num1 < num2 and num1 == sum_div(num2) and num2 <= n:
+        print(num1, num2)
