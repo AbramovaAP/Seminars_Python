@@ -12,3 +12,36 @@
     6
     4 15 43 1 15 1          (каждое число вводится с новой строки)
 '''
+from random import randint
+
+n = int(input('Введите длину 1-го массива: '))
+m = int(input('Введите длину 2-го массива: '))
+
+# # Запись 1:
+# list1 = [] #Пустое место для 1-го массива
+# list2 = [] #Пустое место для 2-го массива
+
+# for _ in range(n):
+#     list1.append(randint(1, 10))
+# print(list1)
+
+# for _ in range(m):
+#     list2.append(randint(1, 10))
+# print(list2)
+
+# Запись 2, аналогична записи 1, только более компактнее:
+list1 = [randint(1, 10) for _ in range(n)]
+print(list1)
+
+list2 = [randint(1, 10) for _ in range(m)]
+print(list2)
+# list2 = set(list2) # Можно преобразовать список в множество и сравнить их между собой
+# print(list2)
+
+# Проверяем элементы 1-го массива и выводим только те, которых нет во-2м массиве:
+
+res_list = []
+for num in list1:
+    if num not in list2:
+        res_list.append(num)
+        print(num, end=' ')
