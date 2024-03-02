@@ -9,8 +9,24 @@
     Ввод:               Вывод:
     1 2 3 2 3           2
 '''
+#================Решение 1==========================
+from random import randint
 
-# #Решение 1
+n = int(input('Введите длину массива: '))
+
+mass = [randint(1, 5) for _ in range(n)]
+print(mass)
+
+count = 0
+for i in range(len(mass)-1):
+    for j in range(i+1, len(mass)):
+        if mass[i] == mass[j]:
+            # print(mass[i], mass[j])
+            count += 1
+print(count)
+
+
+# #================Решение 2==========================
 # from random import randint
 
 # n = int(input('Введите длину массива: '))
@@ -34,7 +50,7 @@
 #             count += 1
 # print(count)
 
-#Решение 2
+#================Решение 3==========================
 from random import randint
 
 n = int(input('Введите длину массива: '))
