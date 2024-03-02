@@ -59,3 +59,11 @@ for num_1 in range(219,k+1):
     num_2 = sum_div(num_1)
     if num_1 < num_2 and sum_div(num_2) == num_1 and num_2 < k:
         print(num_1, num_2)
+
+# #Если со словорями:
+#         dict_ = {219: 77, 220:284,.....,284: 220}
+
+# for num_1 in dict_:
+#     num_2 = dict_[num_1]
+#     if num_1 < num_2 < k and dict_[num_2] == num_1:
+#         print(num_1, num_2)
