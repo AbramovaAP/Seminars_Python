@@ -9,8 +9,10 @@
 # ===================Решение 1==============================
 def Power(A, B):
     
-    if B == 1:
-       return A
+    if A == 0:
+       return 0
+    if B == 0:
+       return 1
     return A * Power(A, B-1)
 
 Exp = int(input("Введите значение степени числа: "))
