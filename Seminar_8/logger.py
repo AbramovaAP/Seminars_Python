@@ -57,3 +57,35 @@ def search_contact(): #Поиск контакта по параметрам
         lst_contact = str_contact.replace(':', '').split()# сплитуем по каждому элементу, получаем каждую позицию в отдельной "подстроке"
         if search in lst_contact[i_var]: #проверяем наличие введенных данных в имеющемся списке
             print(str_contact)# если ДА, то выводим найденный контакт, один или несколько
+
+def copy_contact(): # 4. Копирование выбранного контакта в др файл по его номеру
+    
+    print('Список доступных контактов для копирования: ')
+    print()
+    
+    # Считываем данные с файла
+    with open("phonebook.txt", 'r', encoding='utf-8') as file: 
+        date_contacts_str = file.read() # Считываем все контакты ввиде одной строки
+    #каждый контакт делаем отдельным элементом списка:
+    date_contacts_list = date_contacts_str.rstrip().split('\n\n') 
+    
+    i_number = [] # Запишем номера контактов в отдельный список
+
+    for number, contact in enumerate(date_contacts_list, 1):#нумерация контактов будет начинаться с 1
+        i_number.append(number)
+        print(number, contact) # Выводится номер контакта и сам контакт
+    # print(i_number) # Возможные варианты поиска
+
+    print()
+    number_contact = int(input('Введите номер контакта: '))
+    print()
+
+    for number, contact in enumerate(date_contacts_list, 1):#нумерация контактов будет начинаться с 1
+        if number == number_contact:
+            # print(number_contact, contact)
+            print(contact)
+                # Записываем полученный контакт в новый файл:
+            with open("phonebook_copy.txt", 'a', encoding='utf-8') as file:
+                file.write(f'{contact} \n\n') #записываем, либо дозаписываем данные котакта в файл
+    print()
+    print('Копирование произведено. Проверьте файл phonebook_copy.txt на изменения.')
