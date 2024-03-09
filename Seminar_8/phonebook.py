@@ -65,7 +65,7 @@ def create_contact():# Вызываем функции и получаем от 
     return f'{surname} {name} {patronymic}: {phone}\n{address}\n\n' #Вид сформированной строки контакта
                                                             # в конце добавляем \n\n, чтобы вывод след контакта был через строку
 
-def add_contact(): # Создание контакта
+def add_contact(): # 1. Создание контакта
     '''Вызываем функцию create_contact(), и сохраняем ее в новую переменную contact_str
     Далее открываем файл на дозапись и обращаемся к файловому дискриптору.
     След. строка непосредственно дозаписывает информацию в файл
@@ -75,19 +75,20 @@ def add_contact(): # Создание контакта
         file.write(contact_str)
 
 
-def print_contacts(): # Выводим контакт
+def print_contacts(): # 2. Выводим контакт
     '''Открываем файл на считывание, считываем длинный список из строк.
     В переменную contacts_list записывает список контактов, переделанный из строки контактов
     '''
-    with open("phonebook.txt", 'r', encoding='utf-8') as file:
+    with open("phonebook.txt", 'r', encoding='utf-8') as file: # Считываем данные с файла
         contacts_str = file.read()
     # print([contacts_str])
-    contacts_list = contacts_str.rstrip().split('\n\n')
-    for n, contact in enumerate(contacts_list, 1):#нумерация контактов будет начинаться с 1
-        print(n, contact) # Выводится номер контакта и сам контакт
+    contacts_list = contacts_str.rstrip().split('\n\n') #каждый контакт делаем отдельным элементом списка
+    for number, contact in enumerate(contacts_list, 1):#нумерация контактов будет начинаться с 1
+        print(number, contact) # Выводится номер контакта и сам контакт
 
 
-def search_contact(): #Поиск контакта по параметрам
+def search_contact(): # 3. Поиск контакта по параметрам
+
     print(
             'Возможные варианты поиска:\n'
             '1. По фамилии\n'
@@ -103,6 +104,7 @@ def search_contact(): #Поиск контакта по параметрам
     i_var = int(var) - 1 #Получаем индекс каждого контакта
 
     search = input('Введите данные для поиска: ').title()
+
     with open("phonebook.txt", 'r', encoding='utf-8') as file:
         contacts_str = file.read() #Считываем данные для поиска
     # print([contacts_str])
@@ -114,27 +116,60 @@ def search_contact(): #Поиск контакта по параметрам
         if search in lst_contact[i_var]: #проверяем наличие введенных данных в имеющемся списке
             print(str_contact)# если ДА, то выводим найденный контакт, один или несколько
 
+#===========================Начало ДЗ=========================================
+def copy_contact(): # 4. Копирование выбранного контакта в др файл по его номеру
+    
+    print('Список доступных контактов для копирования: ')
+    print()
+    
+    # Считываем данные с файла
+    with open("phonebook.txt", 'r', encoding='utf-8') as file: 
+        date_contacts_str = file.read() # Считываем все контакты ввиде одной строки
+    #каждый контакт делаем отдельным элементом списка:
+    date_contacts_list = date_contacts_str.rstrip().split('\n\n') 
+    
+    i_number = [] # Запишем номера контактов в отдельный список
 
+    for number, contact in enumerate(date_contacts_list, 1):#нумерация контактов будет начинаться с 1
+        i_number.append(number)
+        print(number, contact) # Выводится номер контакта и сам контакт
+    # print(i_number) # Возможные варианты поиска
 
+    print()
+    number_contact = int(input('Введите номер контакта: '))
+    print()
 
+    for number, contact in enumerate(date_contacts_list, 1):#нумерация контактов будет начинаться с 1
+        if number == number_contact:
+            # print(number_contact, contact)
+            print(contact)
+                # Записываем полученный контакт в новый файл:
+            with open("phonebook_copy.txt", 'a', encoding='utf-8') as file:
+                file.write(f'{contact} \n\n') #записываем, либо дозаписываем данные котакта в файл
+    print()
+    print('Копирование произведено. Проверьте файл phonebook_copy.txt на изменения.')
+
+#===========================Конец ДЗ=========================================
 
 def interface():
     with open("phonebook.txt", 'a', encoding='utf-8'):#создали один раз, в след итерациях открыли файл на дозапись
         pass
     
     var = 0
-    while var != '4':
+    while var != '5':
         print(
+            '\n'
             'Возможные варианты:\n'
             '1. Добавить контакт\n'
             '2. Вывести на экран\n'
             '3. Поиск контакта\n'
-            '4. Выход'
+            '4. Копировать контакт\n'
+            '5. Выход'
             )
         print()
 
         var = input('Выберите вариант действия: ')
-        while var not in ('1', '2', '3', '4'):
+        while var not in ('1', '2', '3', '4', '5'):
             print('Некорректный ввод!')
             var = input('Выберите вариант действия: ')
         print()
@@ -147,6 +182,8 @@ def interface():
             case '3':
                 search_contact()
             case '4':
+                copy_contact()
+            case '5':
                 print('До свидания!')
         print()
 
