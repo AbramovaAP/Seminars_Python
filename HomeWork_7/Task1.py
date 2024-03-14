@@ -62,3 +62,66 @@ if len(stroka) > 1:
         print('Парам пам-пам')
 else:
     print('Количество фраз должно быть больше одной!')
+
+
+#========================= ДОПОЛНЕНИЕ про винни пуха: ===============================
+
+#1.
+def rifma(poem):
+    phrases_list = poem.lower().split()
+    sum_vowels = lambda phrase: sum(1 for symbol in phrase if symbol in 'еёаиоуыэюя')
+    tmp = sum_vowels(phrases_list[0]) #4 перебрали нулевую фразу
+    if all([sum_vowels(phrase) == tmp for phrase in phrases_list[1:]]): #перебираем все оставшиеся фразу
+        return 'Парам пам-пам'
+    return 'Пам парам'
+
+print(rifma('пара-ра-рам рам-пам-папам па-ра-па-дам'))
+
+#2.
+def rifma(poem):
+    phrases_list = poem.lower().split()
+    sum_vowels = lambda phrase: len(list(filter(lambda symbol: symbol in 'аеёиоуыэюя', phrase)))
+    vowels_0 = sum_vowels(phrases_list[0]) #4
+    if all(map(lambda phrase: sum_vowels(phrase) == vowels_0, phrases_list[1:])):
+        return 'Парам пам-пам'
+    return 'Пам парам'
+
+print(rifma('пара-ра-рам рам-пам-папам па-ра-па-дам'))
+
+#3.
+def cntVowLet(str):
+    cnt = 0
+    for let in str:
+        if let in vowLet:
+            cnt += 1
+    return cnt
+
+vowLet = "а, е, ё, и, о, у, ы, э, ю, я".split(', ')
+
+inStr = input("Введите стихотворение Винни-Пуха: ")
+res = set(map(cntVowLet, inStr.split()))
+
+if len(res) == 1:
+    print('Парам пам-пам')
+else:
+    print('Пам парам')
+
+#4.
+def sum_vowels(phrase):
+    vowLet = 'еёаиоуыэюя'
+    cnt = 0
+    for let in phrase:
+        if let in vowLet:
+            cnt += 1
+    return cnt
+
+def chek_rifm(poem):
+    vowel_0 = sum_vowels(poem[0])
+    for phrase in poem[1:]:
+        if sum_vowels(phrase) != vowel_0:
+            return 'Пам парам'
+    return 'Парам пам-пам'
+
+
+text= input("Введите стихотворение Винни-Пуха: ").split()
+print(chek_rifm(text))
